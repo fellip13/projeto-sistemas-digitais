@@ -9,7 +9,7 @@ entity seq_rec is
 end seq_rec;
 
 architecture process_3 of seq_rec is
-	type state_type is (A, B, C, D);
+	type state_type is (A, B, C, D, E);
 	signal state, next_state : state_type;
 begin
 
@@ -37,21 +37,27 @@ begin
 				end if;
 			when B =>
 				if X = '1' then
-					next_state <= C;
+					next_state <= B;
 				else
-					next_state <= A;
+					next_state <= C;
 				end if;
 			when C =>
 				if X = '1' then
-					next_state <= C;
+					next_state <= B;
 				else
 					next_state <= D;
 				end if;
 			when D =>
 				if X = '1' then
-					next_state <= B;
+					next_state <= E;
 				else
 					next_state <= A;
+				end if;
+			when E =>
+				if X = '1' then
+					next_state <= B;
+				else
+					next_state <= C;
 				end if;
 		end case;
 	end process;
@@ -68,11 +74,9 @@ begin
 			when C =>
 				Z <= '0';
 			when D =>
-				if X = '1' then
-					Z <= '1';
-				else
-					Z <= '0';
-				end if;
+				Z <= '0';
+			when E =>
+				Z <= '1';
 		end case;
 	end process;
 end;
