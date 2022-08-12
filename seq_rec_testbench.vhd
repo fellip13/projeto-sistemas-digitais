@@ -9,8 +9,8 @@ end seq_rec_testbench;
 
 architecture testbench of seq_rec_testbench is
 	signal clock, X, reset, Z: std_logic;
-	signal test_sequence : std_logic_vector(0 to 10)
-		:= "01110100100";
+	signal test_sequence : std_logic_vector(0 to 11)
+		:= "100100101001";
 
 	constant PERIOD : time := 100 ns;
 
@@ -30,9 +30,9 @@ begin
 		X <='0';
 		-- ensure that inputs are applied
 		-- away from the active clock edge
-		wait for 5*PERIOD/4;
+		wait for PERIOD;
 		reset <= '0';
-		for i in 0 to 10 loop
+		for i in 0 to 11 loop
 			X <= test_sequence(i);
 			wait for PERIOD;
 		end loop;
